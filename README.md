@@ -22,6 +22,7 @@ DB에 저장된 하나의 정보로만 로그인 가능하도록 했습니다.
 userEmail: master@gmail.com
 
 userPw: 11111111
+
 userName: 박진만
 <br/>
 참고로 userNum 은 PK, NN, AI입니다.
