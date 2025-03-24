@@ -19,9 +19,9 @@ DB에 저장된 하나의 정보로만 로그인 가능하도록 했습니다.
 
   
 <br/>
-  userEmail: master@gmail.com 
-  userPw: 11111111
-  userName: 박진만
+userEmail: master@gmail.com 
+userPw: 11111111
+userName: 박진만
 <br/>
 참고로 userNum 은 PK, NN, AI입니다.
 
@@ -35,7 +35,8 @@ DB에 저장된 하나의 정보로만 로그인 가능하도록 했습니다.
 5. 레슨 상세페이지(LessonDetail.js)의 시간을 누르면 레슨 옵션페이지(LessonOption.js)로 이동하는데, 화면 구현
 6. db에 레슨배경이미지 데이터 어트리뷰트 추가
 
-
+<br/>
+<br/>
 ## DB import
 DB는 MySQL에서 최근 카톡에 올려놓은  `Dump20250325.sql ` import 하시면 됩니다.
 
@@ -48,7 +49,8 @@ DB는 MySQL에서 최근 카톡에 올려놓은  `Dump20250325.sql ` import 하�
 
 
 
-
+<br/>
+<br/>
 
 ## db.js 일부 코드 수정 
  ```
@@ -73,12 +75,17 @@ const db = mysql.createConnection({
  ```
 로 수정하세요
 
+<br/>
+<br/>
 
 ## package.json의 패키지 설치 
  ```
 npm install
  ```
 설치 안 되면 하나씩 따로 설치 하세요.
+
+<br/>
+<br/>
 
 ## 실행
 nodejsexpress 폴더에서 터미널에
