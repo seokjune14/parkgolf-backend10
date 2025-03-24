@@ -36,7 +36,11 @@ const db = mysql.createConnection({
 로 수정하세요
 
 
-
+## package.json의 패키지 설치 
+ ```
+npm install
+ ```
+설치 안 되면 하나씩 따로 설치 하세요.
 
 ## 실행
 nodejsexpress 폴더에서 터미널에
