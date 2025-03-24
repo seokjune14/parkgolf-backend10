@@ -2,6 +2,8 @@
 DB는 MySQL에서 카톡에 올려놓은  `Dump20250322.sql ` import 하시면 됩니다.
 
 ![image](https://github.com/user-attachments/assets/167b8cb4-01b1-4253-8b58-d547b84ce086)
+
+
 위 사진처럼 스키마명 수정하세요.
 
 참고로 제 MySQL 버전은  `8.0.21 `입니다. < 상관있을까요?
