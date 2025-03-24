@@ -36,6 +36,7 @@ userName: 박진만
 4. 레슨 상세페이지(LessonDetail.js)의 배경이미지, 강사프로필이미지, 강사명, 레슨명, 가격, 위치, 레슨설명, 강사 경력 및 자격증, 시간
 5. 레슨 상세페이지(LessonDetail.js)의 시간을 누르면 레슨 옵션페이지(LessonOption.js)로 이동하는데, 화면 구현
 6. db에 레슨배경이미지 데이터 어트리뷰트 추가
+등등...
 
 <br/>
 <br/>
@@ -95,5 +96,7 @@ nodejsexpress 폴더에서 터미널에
  ```
  nodemon server.js
  ```
+`node`도 가능하지만 앵강하면 `nodemon` 어떠십니까
+
 실행 안 되면 `nodemon` 설치 후 실행하세요.
 
