@@ -6,14 +6,14 @@ const app = express();
 const PORT = 5000;
 
 // 미들웨어 설정
-app.use(cors()); // 모든 요청 허용 (개발용)
+app.use(cors()); // 모든 요청 허용
 app.use(express.json()); // JSON 파싱
 
 // MySQL 연결 설정
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',        // ← 사용자에 맞게 수정
-    password: '0809', // ← 비밀번호에 맞게 수정
+    user: 'root',      
+    password: '0809', 
     database: 'parkgolf_db',
 });
 
@@ -23,11 +23,11 @@ db.connect((err) => {
         console.error('MySQL 연결 오류:', err);
         return;
     }
-    console.log('✅ MySQL 연결 성공');
+    console.log('MySQL 연결 성공');
 });
 
 
-// 📌 회원가입 API
+// 회원가입 API
 app.post('/api/signup', (req, res) => {
     const { userName, userEmail, userPw } = req.body;
 
@@ -60,7 +60,7 @@ app.post('/api/signup', (req, res) => {
 });
 
 
-// 📌 로그인 API
+// 로그인 API
 app.post('/api/login', (req, res) => {
     const { userEmail, userPw } = req.body;
 
@@ -83,11 +83,12 @@ app.post('/api/login', (req, res) => {
 
 // 기본 라우트
 app.get('/', (req, res) => {
-    res.send(' ParkGolf 레슨 예약 서버 실행 중');
+    res.send(' 파크골프 레슨 예약 앱 서버 실행 중');
 });
+
 
 
 // 서버 실행
 app.listen(PORT, () => {
-    console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);
+    console.log(`서버 실행 중: http://localhost:${PORT}`);
 });
