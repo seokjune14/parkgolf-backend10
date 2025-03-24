@@ -15,6 +15,8 @@
 로그인화면(Login.js) 상단에 '강사로그인' 링크 텍스트을 누르면 강사로그인화면(Logininst.js)으로 이동합니다.
 
 DB에 저장된 하나의 정보로만 로그인 가능하도록 했습니다.
+
+  
   
   userEmail: master@gmail.com 
   
