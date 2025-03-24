@@ -96,7 +96,7 @@ nodejsexpress 폴더에서 터미널에
  ```
  nodemon server.js
  ```
-`node`도 가능하지만 앵강하면 `nodemon` 어떠십니까
+`node`도 가능하지만 자동재시작 `nodemon` 어떠십니까
 
 실행 안 되면 `nodemon` 설치 후 실행하세요.
 
