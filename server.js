@@ -1,14 +1,19 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = 5000;
 
 
+
 // 미들웨어 설정
 app.use(cors()); // 모든 요청 허용
 app.use(express.json()); // JSON 파싱
+
+// 정적 이미지 파일 경로 설정
+app.use('/img', express.static(path.join(__dirname, 'public', 'img')));
 
 
 // /api로 시작하는 요청을 authRoutes 파일의 라우팅으로 전달
