@@ -9,7 +9,8 @@ const CartModel = {
                 l.lesPrice,
                 l.lesThumbImg,
                 l.lesPlace,
-                l.lesDetailPlace
+                l.lesDetailPlace,
+                l.lesTime 
             FROM cart c
             JOIN lesson l ON c.lessonId = l.lesNum
             WHERE c.userId = ?

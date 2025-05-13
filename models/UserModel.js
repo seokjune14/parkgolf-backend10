@@ -1,10 +1,12 @@
 const db = require('../db');
 
 // 사용자 위치 업데이트
-const updateUserLocation = (userNum, location1, location2, callback) => {
-    const sql = 'UPDATE user SET userlocation1 = ?, userlocation2 = ? WHERE userNum = ?';
-    db.query(sql, [location1, location2, userNum], callback);
+const updateLocation = async (userNum, location1, location2) => {
+    const sql = 'UPDATE `user` SET userlocation1 = ?, userlocation2 = ? WHERE userNum = ?';
+    const [result] = await db.execute(sql, [location1, location2, userNum]);
+    return result;
 };
+
 
 // db에서 위치정보 가져오기
 const getLocationFromDB = (userNum, callback) => {
@@ -17,6 +19,6 @@ const getLocationFromDB = (userNum, callback) => {
 };
 
 module.exports = {
-    updateUserLocation,
+    updateLocation,
     getLocationFromDB, 
 };
