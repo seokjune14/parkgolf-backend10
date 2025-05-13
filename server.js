@@ -9,6 +9,7 @@ const PORT = 5000;
 
 const lessonRoutes = require('./routes/lessonRoutes');
 
+const userRoutes = require('./routes/userRoutes');
 
 // 미들웨어 설정
 app.use(cors()); // 모든 요청 허용
@@ -36,3 +37,6 @@ app.listen(PORT, () => {
 app.use('/api/lessons', lessonRoutes);
 
 app.use('/api/cart', cartRoutes);
+
+
+app.use('/api/user', userRoutes);
