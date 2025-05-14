@@ -1,42 +1,38 @@
+// server.js
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+
 const authRoutes = require('./routes/authRoutes');
+const lessonRoutes = require('./routes/lessonRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const userRoutes = require('./routes/userRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-const lessonRoutes = require('./routes/lessonRoutes');
+// ─── 미들웨어 설정 ────────────────────────────────
+app.use(cors());               // 모든 도메인에서의 요청 허용
+app.use(express.json());       // JSON 바디 파싱
 
-const userRoutes = require('./routes/userRoutes');
-
-// 미들웨어 설정
-app.use(cors()); // 모든 요청 허용
-app.use(express.json()); // JSON 파싱
-
-// 정적 이미지 파일 경로 설정
+// ─── 정적 파일 제공 ────────────────────────────────
 app.use('/img', express.static(path.join(__dirname, 'public', 'img')));
 
+// ─── 라우트 등록 ───────────────────────────────────
+app.use('/api', authRoutes);                   // 로그인/회원가입 등 auth
+app.use('/api/lessons', lessonRoutes);         // 레슨 관련 CRUD
+app.use('/api/cart', cartRoutes);              // 장바구니 관련
+app.use('/api/user', userRoutes);              // 사용자 프로필 관련
+app.use('/api/application', applicationRoutes); // 레슨 신청 관련
 
-// api로 시작하는 요청을 authRoutes 파일의 라우팅으로 전달
-app.use('/api', authRoutes);
-
-// 기본 라우트
+// ─── 기본 라우트 ─────────────────────────────────
 app.get('/', (req, res) => {
-    res.send('파크골프 레슨 예약 앱 서버 실행 중');
+  res.send('파크골프 레슨 예약 앱 서버 실행 중');
 });
 
-
-// 서버 실행
+// ─── 서버 시작 ───────────────────────────────────
 app.listen(PORT, () => {
-    console.log(`서버 실행 중: http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
-
-
-app.use('/api/lessons', lessonRoutes);
-
-app.use('/api/cart', cartRoutes);
-
-
-app.use('/api/user', userRoutes);
