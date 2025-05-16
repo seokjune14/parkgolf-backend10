@@ -4,12 +4,13 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const authRoutes = require('./routes/authRoutes');
-const lessonRoutes = require('./routes/lessonRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const userRoutes = require('./routes/userRoutes');
-const applicationRoutes = require('./routes/applicationRoutes');
-const lessonApiRoutes   = require('./routes/lessonApiRoutes');
+const authRoutes         = require('./routes/authRoutes');
+const lessonRoutes       = require('./routes/lessonRoutes');
+const cartRoutes         = require('./routes/cartRoutes');
+const userRoutes         = require('./routes/userRoutes');
+const applicationRoutes  = require('./routes/applicationRoutes');
+const lessonApiRoutes    = require('./routes/lessonApiRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -21,12 +22,15 @@ app.use(express.json());       // JSON 바디 파싱
 app.use('/img', express.static(path.join(__dirname, 'public', 'img')));
 
 // ─── 라우트 등록 ───────────────────────────────────
-app.use('/api', authRoutes);                   // 로그인/회원가입 등 auth
-app.use('/api/lessons', lessonRoutes);         // 레슨 관련 CRUD
-app.use('/api/cart', cartRoutes);              // 장바구니 관련
-app.use('/api/user', userRoutes);              // 사용자 프로필 관련
-app.use('/api/application', applicationRoutes); // 레슨 신청 관련
-app.use('/api/lessons',   lessonApiRoutes);
+app.use('/api',               authRoutes);            // 로그인/회원가입 등 auth
+app.use('/api/lessons',       lessonRoutes);          // 레슨 관련 CRUD (팀원 코드)
+app.use('/api/cart',          cartRoutes);            // 장바구니 관련
+app.use('/api/user',          userRoutes);            // 사용자 프로필 관련
+app.use('/api/application',   applicationRoutes);     // 레슨 신청 관련
+
+// 네가 추가한 API는 별도 네임스페이스로 분리
+app.use('/api/lesson-api',    lessonApiRoutes);       // 네가 만든 lessonApiRoutes
+
 // ─── 기본 라우트 ─────────────────────────────────
 app.get('/', (req, res) => {
   res.send('파크골프 레슨 예약 앱 서버 실행 중');

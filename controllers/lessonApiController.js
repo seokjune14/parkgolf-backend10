@@ -73,42 +73,66 @@ const createLesson = (req, res) => {
   );
 };
 
-// 레슨 수정
+// 레슨 수정 (부분 업데이트 지원)
 const updateLesson = (req, res) => {
   const { id } = req.params;
-  const { lesName, lesinfo, lesPlace, lesDetailPlace, lesPrice, lesTime } = req.body;
-  const sql = `
-    UPDATE lesson
-       SET lesName = ?, lesinfo = ?, lesPlace = ?, 
-           lesDetailPlace = ?, lesPrice = ?, lesTime = ?
-     WHERE lesNum = ?
-  `;
-  db.query(
-    sql,
-    [lesName, lesinfo, lesPlace, lesDetailPlace, lesPrice, lesTime, id],
-    (err) => {
-      if (err) {
-        console.error("레슨 수정 실패:", err);
-        return res.status(500).send("서버 에러");
-      }
-      res.json({
-        lesNum: Number(id),
-        lesName,
-        lesinfo,
-        lesPlace,
-        lesDetailPlace,
-        lesPrice,
-        lesTime
-      });
+  const body = req.body;
+
+  // 업데이트 허용 필드 목록
+  const allowedFields = [
+    "lesName",
+    "lesinfo",
+    "lesPlace",
+    "lesDetailPlace",
+    "lesPrice",
+    "lesTime"
+  ];
+
+  // SET 절과 파라미터 배열 조립
+  const setClauses = [];
+  const params = [];
+  allowedFields.forEach(field => {
+    if (body[field] !== undefined) {
+      setClauses.push(`${field} = ?`);
+      params.push(body[field]);
     }
-  );
+  });
+
+  if (setClauses.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "수정할 필드를 하나 이상 제공하세요." });
+  }
+
+  const sql = `UPDATE lesson SET ${setClauses.join(", ")} WHERE lesNum = ?`;
+  params.push(id);
+
+  db.query(sql, params, err => {
+    if (err) {
+      console.error("레슨 수정 실패:", err);
+      return res.status(500).send("서버 에러");
+    }
+
+    // 수정 후 최신 데이터 조회
+    db.query(
+      "SELECT * FROM lesson WHERE lesNum = ?",
+      [id],
+      (err2, rows) => {
+        if (err2) {
+          console.error("수정 후 레슨 조회 실패:", err2);
+          return res.status(500).send("서버 에러");
+        }
+        res.json(rows[0]);
+      }
+    );
+  });
 };
 
 // 레슨 삭제
 const deleteLesson = (req, res) => {
   const { id } = req.params;
   const sql = "DELETE FROM lesson WHERE lesNum = ?";
-  db.query(sql, [id], (err) => {
+  db.query(sql, [id], err => {
     if (err) {
       console.error("레슨 삭제 실패:", err);
       return res.status(500).send("서버 에러");
