@@ -9,7 +9,7 @@ const lessonRoutes = require('./routes/lessonRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const userRoutes = require('./routes/userRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
-
+const lessonApiRoutes   = require('./routes/lessonApiRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -26,7 +26,7 @@ app.use('/api/lessons', lessonRoutes);         // 레슨 관련 CRUD
 app.use('/api/cart', cartRoutes);              // 장바구니 관련
 app.use('/api/user', userRoutes);              // 사용자 프로필 관련
 app.use('/api/application', applicationRoutes); // 레슨 신청 관련
-
+app.use('/api/lessons',   lessonApiRoutes);
 // ─── 기본 라우트 ─────────────────────────────────
 app.get('/', (req, res) => {
   res.send('파크골프 레슨 예약 앱 서버 실행 중');
